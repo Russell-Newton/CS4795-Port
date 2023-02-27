@@ -23,6 +23,9 @@
 # Any file in /RawContent dir will be managed by git lfs.
 !/RawContent/**/*
 
+# My added media
+!/GitMedia/**
+
 # OS/platform generated files.
 
 # Windows
