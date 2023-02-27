@@ -1,0 +1,14 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.MyShaders.cpp.obj": [
+			"MyShaderBlueprintLibrary.gen.cpp.obj",
+			"MyShaders.init.gen.cpp.obj",
+			"TestShaderBlueprintLibrary.gen.cpp.obj",
+			"MyShaderBlueprintLibrary.cpp.obj",
+			"MyShaders.cpp.obj",
+			"MySurfaceShader.cpp.obj",
+			"TestShaderBlueprintLibrary.cpp.obj"
+		]
+	}
+}

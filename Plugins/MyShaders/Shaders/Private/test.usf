@@ -1,0 +1,27 @@
+﻿#include "/Engine/Public/Platform.ush"
+#include "/Engine/Private/Common.ush"
+
+Texture2D TestTexture;
+SamplerState TestTextureSampler;
+
+void MainVS(
+	in float4 InPosition : ATTRIBUTE0,
+	in float2 InUV : ATTRIBUTE1,
+	out float4 OutPosition : SV_POSITION,
+	out float2 OutUV : TEXCOORD0
+)
+{
+	OutPosition = InPosition;
+	OutPosition.xy = -1.0f + 2.0f * InPosition.xy;
+	OutPosition.xy *= float2( 1, -1 );
+	OutUV = InUV;
+}
+
+void MainPS(
+	float4 InPosition : SV_POSITION,
+	float2 InUV : TEXCOORD0,
+	out float4 OutColor : SV_Target0
+)
+{
+	OutColor = Texture2DSample(TestTexture, TestTextureSampler, InUV);
+}

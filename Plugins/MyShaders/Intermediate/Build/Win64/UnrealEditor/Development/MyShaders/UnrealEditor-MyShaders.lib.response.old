@@ -1,0 +1,12 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-MyShaders.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\rnewt\Documents\Unreal Projects\CS_4795_Port\Intermediate\Build\Win64\CS_4795_PortEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"C:\Users\rnewt\Documents\Unreal Projects\CS_4795_Port\Plugins\MyShaders\Intermediate\Build\Win64\UnrealEditor\Development\MyShaders\MyShaders.cpp.obj"
+"C:\Users\rnewt\Documents\Unreal Projects\CS_4795_Port\Plugins\MyShaders\Intermediate\Build\Win64\UnrealEditor\Development\MyShaders\Default.rc2.res"
+/OUT:"C:\Users\rnewt\Documents\Unreal Projects\CS_4795_Port\Plugins\MyShaders\Intermediate\Build\Win64\UnrealEditor\Development\MyShaders\UnrealEditor-MyShaders.lib"

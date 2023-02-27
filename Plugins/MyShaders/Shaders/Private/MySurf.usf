@@ -1,0 +1,54 @@
+﻿#include "/Engine/Public/Platform.ush"
+#include "/Engine/Private/Common.ush"
+
+#define WAVE_AMP_UPSCALE 65536
+
+Texture2D BaseColor;
+SamplerState BaseColorSampler;
+float BaseUVScaling;
+
+Texture2D SceneColor;
+SamplerState SceneColorSampler;
+float4 ShallowColor;
+float4 DeepColor;
+
+Texture2D SceneDepth;
+SamplerState SceneDepthSampler;
+
+Texture2D WaveTex;
+SamplerState WaveTexSampler;
+
+float4x4 LocalToWorld;
+float4x4 WorldToClip;
+
+
+
+void MainVS(
+	in float4 InPosition : ATTRIBUTE0,
+	in float2 InUV : ATTRIBUTE1,
+	out float4 OutPosition : SV_POSITION,
+	out float2 OutUV : TEXCOORD0
+)
+{
+	OutPosition = InPosition;
+	OutPosition = mul(OutPosition, LocalToWorld);
+	float4 WaveSample = Texture2DSample(WaveTex, WaveTexSampler, InUV);
+	const float WaveAmplitude = WAVE_AMP_UPSCALE * WaveSample.g;
+	OutPosition.z += 2 * WaveAmplitude * WaveSample.r;
+	OutPosition = mul(OutPosition, WorldToClip);
+	
+	OutUV = InUV * BaseUVScaling;
+}
+
+void MainPS(
+	float4 InPosition : SV_POSITION,
+	float2 InUV : TEXCOORD0,
+	out float4 OutColor : SV_Target0
+)
+{
+	const float4 Base = Texture2DSample(BaseColor, BaseColorSampler, InUV) * DeepColor;
+	const float2 ScreenUV = (InPosition.xy - 0.5) / float2(1920, 1080);
+	const float4 Scene = Texture2DSample(SceneColor, SceneColorSampler, ScreenUV) * ShallowColor;
+	const float Depth = 1 - saturate(Texture2DSample(SceneDepth, SceneDepthSampler, ScreenUV).r / 5120);
+	OutColor = lerp(Base, Scene, Depth * 0.2);
+}

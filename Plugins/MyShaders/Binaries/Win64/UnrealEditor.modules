@@ -1,0 +1,8 @@
+{
+	"BuildId": "23058290",
+	"Modules": 
+	{
+		"MyShaders": "UnrealEditor-MyShaders.dll",
+		"Shaders": "UnrealEditor-Shaders.dll"
+	}
+}
